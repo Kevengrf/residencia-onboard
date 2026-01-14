@@ -270,6 +270,35 @@ export default function CompanyDashboard() {
 
     if (loading) return <div className="flex h-screen items-center justify-center"><Loader2 className="animate-spin" /></div>
 
+    // Check for Pending Status
+    if (profile?.status === 'pending') {
+        return (
+            <div className="min-h-screen bg-muted/20 flex flex-col items-center justify-center p-4">
+                <Card className="max-w-md w-full text-center">
+                    <CardHeader>
+                        <div className="mx-auto bg-amber-100 p-3 rounded-full w-fit mb-4">
+                            <Building className="w-8 h-8 text-amber-600" />
+                        </div>
+                        <CardTitle className="text-xl">Cadastro em Análise</CardTitle>
+                        <CardDescription>
+                            Sua empresa foi cadastrada com sucesso, mas ainda precisa ser aprovada pela nossa equipe de gestão.
+                        </CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                        <div className="text-sm text-muted-foreground bg-muted p-4 rounded-lg">
+                            <p>Entraremos em contato assim que seu acesso for liberado.</p>
+                        </div>
+                    </CardContent>
+                    <CardFooter className="justify-center">
+                        <Button variant="outline" onClick={handleSignOut} className="w-full">
+                            <LogOut className="w-4 h-4 mr-2" /> Voltar para Home
+                        </Button>
+                    </CardFooter>
+                </Card>
+            </div>
+        )
+    }
+
     return (
         <div className="min-h-screen bg-muted/20 pb-20">
             {/* Header */}
