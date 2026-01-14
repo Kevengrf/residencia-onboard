@@ -86,14 +86,15 @@ export function StudentProfileForm({ user, profile, student, iesList }: ProfileF
                     entry_period: entryPeriod,
                     class_name: className,
                     is_embarque_holder: isEmbarque,
-                    shift: shift
+                    shift: shift,
+                    status: 'pending' // [NEW] Require approval for changes
                 })
                 .eq('id', user.id)
 
             if (studentError) throw studentError
 
             router.refresh()
-            alert('Perfil salvo com sucesso!')
+            alert('Perfil salvo! Suas alterações estão pendentes de aprovação.')
         } catch (error) {
             console.error('Error updating profile:', error)
             alert('Erro ao salvar perfil.')

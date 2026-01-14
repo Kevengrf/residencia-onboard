@@ -19,6 +19,7 @@ export default async function TalentsPage() {
                 avatar_url
             )
         `)
+        .eq('status', 'active')
         .order('created_at', { ascending: false })
 
     return (
