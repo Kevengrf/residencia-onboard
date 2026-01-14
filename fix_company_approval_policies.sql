@@ -17,19 +17,17 @@ TO authenticated
 USING (
   (SELECT role FROM public.profiles WHERE id = auth.uid()) IN ('management', 'support', 'ies')
   OR
-  status = 'active'
-  OR
   status = 'approved'
   OR
   -- Users can view their own company (even pending)
-  user_id = auth.uid() -- Requires user_id column in companies (added in previous script)
+  user_id = auth.uid()
 );
 
--- 4. Allow Public to see Approved/Active companies (for public pages)
+-- 4. Allow Public to see Approved companies (for public pages)
 CREATE POLICY "Public can view approved companies"
 ON public.companies FOR SELECT
 TO anon
-USING (status IN ('active', 'approved'));
+USING (status = 'approved');
 
 -- 5. Management can UPDATE companies (Approve/Reject)
 CREATE POLICY "Management can update companies"
